@@ -1,18 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "@/pages/Home";
-import Projects from "@/pages/Projects";
-import Education from "@/pages/Education";
-import Certifications from "@/pages/Certifications";
-import Experience from "@/pages/Experience";
+import { createBrowserRouter } from "react-router-dom";
+import RootLayout from "./RootLayout";
 
-export default function AppRouter() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/projects" element={<Projects />} />
-      <Route path="/education" element={<Education />} />
-      <Route path="/certifications" element={<Certifications />} />
-      <Route path="/experience" element={<Experience />} />
-    </Routes>
-  );
-}
+import Home from "../pages/Home";
+import Projects from "../pages/Projects";
+import Experience from "../pages/Experience";
+import EducationPage from "../pages/Education";
+import CertificationsPage from "../pages/Certifications";
+import Contact from "../pages/Contact";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "projects", element: <Projects /> },
+      { path: "experience", element: <Experience /> },
+      { path: "education", element: <EducationPage /> },
+      { path: "certifications", element: <CertificationsPage /> },
+      { path: "contact", element: <Contact /> },
+    ],
+  },
+]);

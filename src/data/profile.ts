@@ -1,12 +1,25 @@
-export const profile = {
-  name: "Nom Prénom",
-  role: "Ingénieur Logiciel / Chercheur",
-  location: "Marrakech, Maroc",
-  email: "prenom.nom@email.com",
+export interface Social {
+  label: string;
+  href: string;
+}
+
+export interface Profile {
+  name: string;
+  title: string;
+  email: string;
+  location: string;
+  bio: string;
+  socials: Social[];
+}
+
+export const profile: Profile = {
+  name: "Votre Nom",
+  title: "Développeur Full Stack",
+  email: "votre@email.com",
+  location: "Paris, France",
+  bio: "Passionné par le développement web et les nouvelles technologies.",
   socials: [
-    { label: "GitHub", href: "https://github.com/monhandle" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/monhandle" }
+    { label: "GitHub", href: "https://github.com/votre-username" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/votre-username" },
   ],
-  about: "IA, SIG, DevSecOps, Android.",
-  skills: ["React","TypeScript","Node.js","Docker","Kubernetes","GIS"]
 };

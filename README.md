@@ -1,6 +1,8 @@
 # Portfolio React Pro (Vite + TypeScript)
 
 Portfolio moderne développé avec **React + Vite + TypeScript**, stylé avec **Tailwind CSS + shadcn/ui**, et déployé sur **Vercel**.
+<img width="1911" height="894" alt="image" src="https://github.com/user-attachments/assets/10ec3407-e9a2-47fa-9938-0f07e8c2f1f5" />
+
 
 
 ##  Objectifs du projet
@@ -139,6 +141,5 @@ Output directory: dist
 ## URL finale
 
 Une fois déployé, ton site sera disponible ici :
-
-https://projet-portfolio-react-pro-final-vl.vercel.app/
+https://portfolio-aya-ait-el-harch.vercel.app/
 

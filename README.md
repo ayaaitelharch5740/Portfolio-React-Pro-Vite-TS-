@@ -1,7 +1,8 @@
 # Portfolio React Pro (Vite + TypeScript)
 
 Portfolio moderne développé avec **React + Vite + TypeScript**, stylé avec **Tailwind CSS + shadcn/ui**, et déployé sur **Vercel**.
-<img width="1887" height="885" alt="image" src="https://github.com/user-attachments/assets/44cdca95-c17a-4ab8-91c2-79fb3a4f4b27" />
+<img width="1911" height="894" alt="image" src="https://github.com/user-attachments/assets/10ec3407-e9a2-47fa-9938-0f07e8c2f1f5" />
+
 
 
 ##  Objectifs du projet

@@ -1,109 +1,126 @@
-import { motion } from "framer-motion";
-import { GraduationCap, BookOpen, Award } from "lucide-react";
+// src/pages/Education.tsx
 import { Helmet } from "react-helmet-async";
 import { education } from "@/data/education";
 
 function fmt(s?: string) {
-  if (!s) return "Pr\u00e9sent";
+  if (!s) return "Présent";
   const [y, m] = s.split("-");
-  return new Date(+y, +m - 1).toLocaleDateString("fr-FR", {
-    month: "short",
-    year: "numeric",
-  });
+  return new Date(+y, +m - 1).toLocaleDateString("fr-FR", { month: "short", year: "numeric" });
 }
+
+const BookIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+  </svg>
+);
+
+const SkillBarRow = ({ label, pct, brown }: { label: string; pct: number; brown?: boolean }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: ".55rem" }}>
+    <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text-muted)", width: 90, flexShrink: 0 }}>{label}</span>
+    <div className="skill-bar__track" style={{ flex: 1 }}>
+      <div className="skill-bar__fill" style={{ width: `${pct}%`, background: brown ? "var(--brown)" : "var(--blue)" }} />
+    </div>
+    <span style={{ fontSize: 11, color: "var(--text-dim)", width: 32, textAlign: "right", flexShrink: 0 }}>{pct}%</span>
+  </div>
+);
 
 export default function EducationPage() {
   return (
-    <>
+    <div className="page-wrap">
       <Helmet>
-        <title>Formation {"\u2014"} Portfolio</title>
+        <title>Formation — Portfolio AYA</title>
       </Helmet>
 
-      <section className="space-y-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-4xl font-bold tracking-tight">Formation</h1>
-          <p className="text-muted-foreground mt-1">Mon parcours acad\u00e9mique</p>
-        </motion.div>
+      {/* ── Page hero ── */}
+      <div className="page-hero">
+        <p className="hero-eyebrow" style={{ marginBottom: ".5rem" }}>Parcours académique</p>
+        <h1>Ma <span>Formation</span></h1>
+        <p>Cursus universitaire, apprentissages clés et compétences développées.</p>
+      </div>
 
-        <div className="relative">
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-border to-transparent" />
-
-          <div className="space-y-8">
-            {education.map((e, idx) => (
-              <motion.div
-                key={e.school + e.start}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.15 }}
-                className="relative pl-12"
-              >
-                <div className="absolute left-2 top-6 w-5 h-5 rounded-full border-2 border-primary bg-background flex items-center justify-center">
-                  <GraduationCap size={10} className="text-primary" />
+      {/* ── Timeline formations ── */}
+      <div className="timeline" style={{ marginBottom: "2rem" }}>
+        {education.map((e, idx) => (
+          <div key={e.school + e.start} className="timeline-entry">
+            <div className={`timeline-dot ${idx === 0 ? "timeline-dot--active" : ""}`} />
+            <div className={`card ${idx === 0 ? "card--blue" : ""}`}>
+              <div className="card-head">
+                <div>
+                  <p className="card-type">{idx === 0 ? "Formation actuelle" : "Formation précédente"}</p>
+                  <p className="card-title">
+                    {e.degree}
+                    {e.field && <span style={{ color: "var(--text-dim)", fontWeight: 400 }}> — {e.field}</span>}
+                  </p>
+                  <p className="card-subtitle" style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 3 }}>
+                    {e.school}{e.location && ` · ${e.location}`}
+                  </p>
                 </div>
-
-                <div className="bg-card border border-border rounded-2xl p-6 hover:border-primary/30 hover:shadow-md transition-all duration-200">
-                  <div className="flex flex-wrap justify-between items-start gap-3 mb-4">
-                    <div>
-                      <h2 className="font-semibold text-lg">
-                        {e.degree}
-                        {e.field && (
-                          <span className="text-muted-foreground font-normal"> {"\u2014"} {e.field}</span>
-                        )}
-                      </h2>
-                      <p className="text-muted-foreground text-sm mt-0.5">
-                        {e.school}
-                        {e.location && " \u00b7 " + e.location}
-                      </p>
+                <div style={{ textAlign: "right" }}>
+                  <span className={`date-pill ${idx === 0 ? "date-pill--blue" : ""}`}>
+                    {fmt(e.start)} — {fmt(e.end)}
+                  </span>
+                  {e.gpa && (
+                    <div style={{ marginTop: 6 }}>
+                      <span className="badge badge--brown" style={{ fontSize: 11 }}>
+                        Mention {e.gpa}
+                      </span>
                     </div>
+                  )}
+                </div>
+              </div>
 
-                    <div className="text-right space-y-1">
-                      <p className="text-xs text-muted-foreground">
-                        {fmt(e.start)} {"\u2014"} {fmt(e.end)}
-                      </p>
-                      {e.gpa && (
-                        <span className="inline-flex items-center gap-1 text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                          <Award size={10} />
-                          {e.gpa}
-                        </span>
-                      )}
-                    </div>
+              {e.courses && e.courses.length > 0 && (
+                <>
+                  <div className="divider" />
+                  <p className="section-label" style={{ marginBottom: ".5rem", display: "flex", alignItems: "center", gap: 5 }}>
+                    <BookIcon /> Cours principaux
+                  </p>
+                  <div className="tags">
+                    {e.courses.map(c => (
+                      <span key={c} className={`tag ${idx === 0 ? "tag--blue" : ""}`}>{c}</span>
+                    ))}
                   </div>
+                </>
+              )}
 
-                  {e.courses && e.courses.length > 0 && (
-                    <div className="mb-4">
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground mb-2">
-                        <BookOpen size={12} />
-                        Cours principaux
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {e.courses.map((c) => (
-                          <span
-                            key={c}
-                            className="px-2.5 py-1 bg-secondary text-secondary-foreground text-xs rounded-lg"
-                          >
-                            {c}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+              {e.highlights && e.highlights.length > 0 && (
+                <>
+                  <div className="divider" />
+                  <div className="points">
+                    {e.highlights.map(h => (
+                      <div key={h} className={`point ${idx === 0 ? "point--active" : ""}`}>{h}</div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
 
-                  {e.highlights && e.highlights.length > 0 && (
-                    <div className="pt-4 border-t border-border space-y-1.5">
-                      {e.highlights.map((h) => (
-                        <p key={h} className="text-sm text-muted-foreground flex items-start gap-2">
-                          <span className="text-primary mt-0.5 shrink-0">{"✦"}</span>
-                          {h}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+      {/* ── Compétences ── */}
+      <p className="section-label" style={{ marginBottom: ".75rem" }}>Compétences techniques</p>
+      <div className="card">
+        <div className="grid-2" style={{ gap: "1.25rem" }}>
+          <div>
+            <p className="section-label" style={{ color: "var(--blue)", marginBottom: ".75rem" }}>Langages & Frameworks</p>
+            <SkillBarRow label="Java"       pct={85} />
+            <SkillBarRow label="Python"     pct={75} />
+            <SkillBarRow label="JavaScript" pct={70} />
+            <SkillBarRow label="PHP"        pct={65} />
+            <SkillBarRow label="React"      pct={68} />
+          </div>
+          <div>
+            <p className="section-label" style={{ color: "var(--brown)", marginBottom: ".75rem" }}>Bases de données & Outils</p>
+            <SkillBarRow label="MySQL"  pct={80} brown />
+            <SkillBarRow label="SQL"    pct={78} brown />
+            <SkillBarRow label="Git"    pct={72} brown />
+            <SkillBarRow label="Kotlin" pct={60} brown />
+            <SkillBarRow label="C++"    pct={55} brown />
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }

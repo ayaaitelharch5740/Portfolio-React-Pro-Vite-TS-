@@ -1,5 +1,6 @@
-import { Helmet } from "react-helmet-async";
+// src/pages/Certifications.tsx
 import { useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 
 interface Certification {
   title: string;
@@ -8,187 +9,126 @@ interface Certification {
   tags: string[];
   link: string | null;
   icon: string;
+  color: "blue" | "brown";
 }
 
 const certifications: Certification[] = [
-  {
-    title: "Kotlin",
-    issuer: "MLIAedu",
-    year: "2026",
-    tags: ["Kotlin", "POO", "Android"],
-    link: "https://mliaedu.toubkalit.com/verify-certificate/40-aca3c957-20a8-44db-8534-2b40a96f2a40-583474",
-    icon: "K",
-  },
-  { title: "PHP",              issuer: "MLIAedu", year: "2026", tags: ["PHP", "Web", "Backend"],          link:"https://mliaedu.toubkalit.com/verify-certificate/44-aca3c957-20a8-44db-8534-2b40a96f2a40-269710", icon: "P"  },
-  { title: "Java",             issuer: "MLIAedu", year: "2025", tags: ["Java", "POO", "Backend"],         link: "https://mliaedu.toubkalit.com/verify-certificate/6-aca3c957-20a8-44db-8534-2b40a96f2a40-221358",icon: "J"  },
-  { title: "Python",           issuer: "MLIAedu", year: "2025", tags: ["Python", "Data", "Scripts"],      link: "https://mliaedu.toubkalit.com/verify-certificate/11-aca3c957-20a8-44db-8534-2b40a96f2a40-330662",icon: "Py" },
-  { title: "C++",              issuer: "MLIAedu", year: "2025", tags: ["C++", "Système", "Performance"],  link: "https://mliaedu.toubkalit.com/verify-certificate/12-aca3c957-20a8-44db-8534-2b40a96f2a40-303236", icon: "C+" },
-  { title: "Bases de données", issuer: "MLIAedu", year: "2025", tags: ["SQL", "MySQL", "Modélisation"],   link: "https://mliaedu.toubkalit.com/verify-certificate/15-aca3c957-20a8-44db-8534-2b40a96f2a40-117318",icon: "DB" },
+  { title: "Kotlin",           issuer: "MLIAedu", year: "2026", tags: ["Kotlin", "POO", "Android"],        link: "https://mliaedu.toubkalit.com/verify-certificate/40-aca3c957-20a8-44db-8534-2b40a96f2a40-583474", icon: "K",  color: "blue"  },
+  { title: "PHP",              issuer: "MLIAedu", year: "2026", tags: ["PHP", "Web", "Backend"],            link: "https://mliaedu.toubkalit.com/verify-certificate/44-aca3c957-20a8-44db-8534-2b40a96f2a40-269710", icon: "P",  color: "brown" },
+  { title: "Java",             issuer: "MLIAedu", year: "2025", tags: ["Java", "POO", "Backend"],           link: "https://mliaedu.toubkalit.com/verify-certificate/6-aca3c957-20a8-44db-8534-2b40a96f2a40-221358",  icon: "J",  color: "blue"  },
+  { title: "Python",           issuer: "MLIAedu", year: "2025", tags: ["Python", "Data", "Scripts"],        link: "https://mliaedu.toubkalit.com/verify-certificate/11-aca3c957-20a8-44db-8534-2b40a96f2a40-330662", icon: "Py", color: "brown" },
+  { title: "C++",              issuer: "MLIAedu", year: "2025", tags: ["C++", "Système", "Performance"],    link: "https://mliaedu.toubkalit.com/verify-certificate/12-aca3c957-20a8-44db-8534-2b40a96f2a40-303236", icon: "C+", color: "blue"  },
+  { title: "Bases de données", issuer: "MLIAedu", year: "2025", tags: ["SQL", "MySQL", "Modélisation"],     link: "https://mliaedu.toubkalit.com/verify-certificate/15-aca3c957-20a8-44db-8534-2b40a96f2a40-117318", icon: "DB", color: "brown" },
 ];
 
-const cardStyle: React.CSSProperties = {
-  background: "#0f172a",
-  border: "0.5px solid rgba(148,163,184,0.15)",
-  borderRadius: 16,
-  padding: "1.75rem 1.5rem",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  textAlign: "center",
-  gap: ".75rem",
-};
+const SearchIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "var(--text-dim)" }}>
+    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+  </svg>
+);
 
-const iconStyle: React.CSSProperties = {
-  width: 56,
-  height: 56,
-  borderRadius: "50%",
-  background: "rgba(96,165,250,0.12)",
-  border: "1px solid rgba(96,165,250,0.25)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 15,
-  fontWeight: 700,
-  color: "#60a5fa",
-};
-
-const badgeStyle: React.CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: 4,
-  background: "rgba(34,197,94,0.1)",
-  color: "#4ade80",
-  fontSize: 11,
-  padding: "3px 10px",
-  borderRadius: 99,
-  border: "0.5px solid rgba(74,222,128,0.2)",
-};
-
-const btnActiveStyle: React.CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 6,
-  width: "100%",
-  background: "rgba(255,255,255,0.05)",
-  color: "#e2e8f0",
-  border: "0.5px solid rgba(148,163,184,0.2)",
-  borderRadius: 8,
-  padding: "9px 14px",
-  fontSize: 13,
-  fontWeight: 500,
-  textDecoration: "none",
-  marginTop: ".5rem",
-  opacity: 1,
-};
-
-const btnDisabledStyle: React.CSSProperties = {
-  ...btnActiveStyle,
-  opacity: 0.4,
-  pointerEvents: "none",
-};
+const LinkIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+    <polyline points="15 3 21 3 21 9"/>
+    <line x1="10" y1="14" x2="21" y2="3"/>
+  </svg>
+);
 
 export default function CertificationsPage() {
   const [q, setQ] = useState("");
 
   const list = useMemo(
-    () =>
-      certifications.filter((c) =>
-        [c.title, c.issuer, ...c.tags]
-          .join(" ")
-          .toLowerCase()
-          .includes(q.toLowerCase())
-      ),
+    () => certifications.filter(c =>
+      [c.title, c.issuer, ...c.tags].join(" ").toLowerCase().includes(q.toLowerCase())
+    ),
     [q]
   );
 
   return (
-    <section style={{ maxWidth: 960, margin: "0 auto", padding: "2rem 1rem" }}>
+    <div className="page-wrap">
       <Helmet>
-        <title>Certifications — Portfolio</title>
-        <meta
-          name="description"
-          content="Certifications en Kotlin, PHP, Java, Python, C++ et Bases de données."
-        />
+        <title>Certifications — Portfolio AYA</title>
+        <meta name="description" content="Certifications en Kotlin, PHP, Java, Python, C++ et Bases de données." />
       </Helmet>
 
-      {/* Hero */}
-      <div
-        style={{
-          background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-          borderRadius: 16,
-          padding: "2.5rem",
-          marginBottom: "2rem",
-          border: "0.5px solid rgba(148,163,184,0.15)",
-          textAlign: "center",
-        }}
-      >
-        <h1 style={{ fontSize: "2rem", fontWeight: 600, color: "#f8fafc", marginBottom: ".5rem" }}>
-          Certifications
-        </h1>
-        <p style={{ fontSize: 15, color: "#94a3b8" }}>
-          Validation de mes compétences techniques et académiques.
-        </p>
+      {/* ── Page hero ── */}
+      <div className="page-hero">
+        <p className="hero-eyebrow" style={{ marginBottom: ".5rem" }}>Validation des compétences</p>
+        <h1>Mes <span>Certifications</span></h1>
+        <p>Compétences techniques certifiées et vérifiées — {certifications.length} certifications obtenues.</p>
       </div>
 
-      {/* Filtre */}
-      <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "1.5rem" }}>
+      {/* ── Filtre ── */}
+      <div style={{ position: "relative", display: "inline-flex", marginBottom: "1.5rem" }}>
+        <SearchIcon />
         <input
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={e => setQ(e.target.value)}
           placeholder="Filtrer (ex: Python, Java...)"
-          aria-label="Filtrer les certifications"
-          style={{
-            background: "rgba(255,255,255,0.05)",
-            border: "5px solid rgba(148,163,184,0.2)",
-            borderRadius: 14,
-            padding: "9px 44px",
-            fontSize: 14,
-            color: "#e2e8f0",
-            outline: "none",
-            width: 260,
-          }}
+          className="input"
+          style={{ paddingLeft: "2rem", width: 260 }}
         />
       </div>
 
-      {/* Grille */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }}>
+      {/* ── Grille ── */}
+      <div className="grid-3">
         {list.length === 0 && (
-          <p style={{ color: "#64748b", fontSize: 14, gridColumn: "1 / -1", textAlign: "center", padding: "3rem" }}>
+          <p style={{ color: "var(--text-dim)", fontSize: 14, gridColumn: "1 / -1", textAlign: "center", padding: "3rem" }}>
             Aucune certification trouvée.
           </p>
         )}
 
-        {list.map((c) => (
-          <div key={c.title} style={cardStyle}>
-            <div style={iconStyle}>{c.icon}</div>
-
-            <div style={{ fontSize: 15, fontWeight: 600, color: "#f8fafc" }}>{c.title}</div>
-            <div style={{ fontSize: 12, color: "#64748b" }}>{c.issuer} • {c.year}</div>
-
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center" }}>
-              {c.tags.map((t) => (
-                <span
-                  key={t}
-                  style={{ background: "rgba(255,255,255,0.06)", color: "#94a3b8", fontSize: 11, padding: "2px 8px", borderRadius: 6 }}
-                >
-                  {t}
-                </span>
-              ))}
+        {list.map(c => (
+          <div key={c.title} className={`cert-card card--${c.color}`}>
+            {/* Icône lettre */}
+            <div
+              className="icon-circle"
+              style={{
+                background: c.color === "blue" ? "var(--blue-dim)" : "var(--brown-dim)",
+                borderColor: c.color === "blue" ? "var(--border-blue)" : "var(--border-brown)",
+                color: c.color === "blue" ? "var(--blue)" : "var(--brown)",
+                fontSize: 16, fontWeight: 800,
+              }}
+            >
+              {c.icon}
             </div>
 
-            <span style={badgeStyle}>✓ Certificat vérifié</span>
+            {/* Titre */}
+            <p className="card-title" style={{ fontSize: 15 }}>{c.title}</p>
+            <p style={{ fontSize: 12, color: "var(--text-dim)" }}>{c.issuer} · {c.year}</p>
 
+            {/* Tags */}
+            <div className="tags" style={{ justifyContent: "center" }}>
+              {c.tags.map(t => <span key={t} className="tag">{t}</span>)}
+            </div>
+
+            {/* Badge vérifié */}
+            <span className="badge badge--green">
+              ✓ Certificat vérifié
+            </span>
+
+            {/* Bouton */}
             {c.link ? (
-              <a href={c.link} target="_blank" rel="noreferrer" style={btnActiveStyle}>
-                🔍 Vérifier en ligne
+              <a
+                href={c.link}
+                target="_blank" rel="noreferrer"
+                className="btn btn--outline btn--full btn--sm"
+                style={{ marginTop: ".25rem" }}
+              >
+                <LinkIcon /> Vérifier en ligne
               </a>
             ) : (
-              <span style={btnDisabledStyle}>🔍 Vérifier en ligne</span>
+              <div
+                className="btn btn--ghost btn--full btn--sm"
+                style={{ marginTop: ".25rem", opacity: 0.45, cursor: "default" }}
+              >
+                Lien indisponible
+              </div>
             )}
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

@@ -53,11 +53,6 @@ const ProjectIcon = () => (
     <line x1="8" y1="17" x2="13" y2="17"/>
   </svg>
 );
-const ArrowIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M12 5l7 7-7 7"/>
-  </svg>
-);
 
 export default function Projects() {
   return (
@@ -76,7 +71,7 @@ export default function Projects() {
 
       {/* ── Grille de cartes ── */}
       <div className="grid-2">
-        {projects.map((p, i) => (
+        {projects.map((p) => (
           <div key={p.title} className={`card card--blue`} style={{ display: "flex", flexDirection: "column", gap: ".85rem" }}>
 
             {/* En-tête */}

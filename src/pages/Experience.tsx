@@ -1,11 +1,6 @@
 // src/pages/Experience.tsx
 import { Helmet } from "react-helmet-async";
 
-const ArrowIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M12 5l7 7-7 7"/>
-  </svg>
-);
 
 export default function Experience() {
   return (
@@ -84,7 +79,7 @@ export default function Experience() {
                 <p className="card-type">Stage</p>
                 <p className="card-title">Développement informatique & Gestion de bases de données</p>
                 <p className="card-subtitle" style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 3 }}>
-                  Département Informatique — Province de Safi
+                  Département Informatique — SEOCOM
                 </p>
               </div>
               <span className="date-pill">2025 · 1 mois</span>

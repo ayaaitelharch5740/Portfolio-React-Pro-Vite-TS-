@@ -272,18 +272,17 @@ body.dark header { background: rgba(14,13,11,0.88); }
   animation: fadeUp 0.55s 0.12s var(--ease) both;
 }
 .hero-photo {
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  aspect-ratio: 3/4;
   object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid var(--bg-surface);
-  box-shadow: 0 0 0 3px var(--blue), var(--shadow-hover);
+  border-radius: var(--r-xl);
+  border: 3px solid var(--bg-surface);
+  box-shadow: var(--shadow-hover);
   display: block;
 }
 .hero-photo-badge {
   position: absolute;
-  bottom: 10px;
-  right: -10px;
+  bottom: -14px; left: -14px;
   background: var(--brown);
   color: #fff;
   border-radius: var(--r-md);
@@ -296,9 +295,9 @@ body.dark header { background: rgba(14,13,11,0.88); }
 
 /* Placeholder si pas de photo */
 .hero-photo-placeholder {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: var(--r-xl);
   background: linear-gradient(145deg, var(--blue-dim), var(--brown-dim));
   border: 2px solid var(--border-brown);
   display: flex; flex-direction: column;

@@ -141,5 +141,5 @@ Output directory: dist
 ## URL finale
 
 Une fois déployé, ton site sera disponible ici :
-https://portfolio-aya-ait-el-harch.vercel.app/
+https://aya-ait-el-harch.vercel.app/
 

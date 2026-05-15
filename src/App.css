@@ -401,10 +401,16 @@ body.dark .navbar {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .desktop-nav { display: none; }
-  .hamburger { display: inline-flex; }
+  .desktop-nav { display: none !important; }
+  .hamburger { 
+    display: inline-flex !important; 
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-actions {
+    display: flex !important;
+  }
 }
-
 /* Sections */
 .section-title {
   text-align: center;

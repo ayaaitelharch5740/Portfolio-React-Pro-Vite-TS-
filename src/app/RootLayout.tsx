@@ -25,52 +25,42 @@ export default function RootLayout() {
 
   const close = () => setMenuOpen(false);
 
+  const navLinks = [
+    { to: "/projects", label: "Projets" },
+    { to: "/experience", label: "Expérience" },
+    { to: "/education", label: "Formations" },
+    { to: "/certifications", label: "Certifications" },
+    { to: "/contact", label: "Contact" },
+  ];
+
   return (
     <>
-      <header style={{
-        position: "sticky", top: 0, zIndex: 100,
-        backdropFilter: "blur(18px)",
-        background: "rgba(248,247,244,0.88)",
-        borderBottom: "0.5px solid var(--border)",
-      }}>
-        <nav className="container nav" style={{ justifyContent: "space-between" }}>
+      <header className="root-header">
+        <nav className="root-nav">
           {/* Logo */}
-          <NavLink to="/" className="logo">
-            AYA<span style={{ color: "var(--brown)" }}>.</span>Hr
+          <NavLink to="/" className="root-logo">
+            AYA<span className="root-logo__dot">.</span>Hr
           </NavLink>
 
           {/* Desktop links */}
-          <div className="links">
-            <NavLink to="/projects">Projets</NavLink>
-            <NavLink to="/experience">Experience</NavLink>
-            <NavLink to="/education">Formations</NavLink>
-            <NavLink to="/certifications">Certifications</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
+          <div className="root-links">
+            {navLinks.map(({ to, label }) => (
+              <NavLink
+                key={to} to={to}
+                className={({ isActive }) => `root-link ${isActive ? "root-link--active" : ""}`}
+              >
+                {label}
+              </NavLink>
+            ))}
           </div>
 
           {/* Actions */}
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {/* Theme toggle */}
-            <button className="theme-btn" onClick={() => setIsDark(!isDark)}>
+          <div className="root-actions">
+            <button className="root-theme-btn" onClick={() => setIsDark(!isDark)} aria-label="Thème">
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              <span>{isDark ? "Clair" : "Sombre"}</span>
             </button>
-
-            {/* Hamburger — mobile only */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              style={{
-                display: "none",
-                background: "transparent",
-                border: "0.5px solid var(--border-md, rgba(44,30,18,0.14))",
-                borderRadius: 8,
-                padding: "7px 10px",
-                cursor: "pointer",
-                color: "var(--text-muted)",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              className="hamburger-btn"
-            >
+            <button className="root-hamburger" onClick={() => setMenuOpen(true)} aria-label="Menu">
               <Menu size={20} />
             </button>
           </div>
@@ -78,60 +68,41 @@ export default function RootLayout() {
       </header>
 
       {/* Overlay */}
-      {menuOpen && (
-        <div
-          onClick={close}
-          style={{
-            position: "fixed", inset: 0,
-            background: "rgba(0,0,0,0.5)",
-            backdropFilter: "blur(4px)",
-            zIndex: 200,
-          }}
-        />
-      )}
+      <div
+        className={`root-overlay ${menuOpen ? "root-overlay--active" : ""}`}
+        onClick={close}
+      />
 
       {/* Mobile menu */}
-      <div style={{
-        position: "fixed", top: 0, right: menuOpen ? 0 : -300,
-        width: 280, height: "100vh",
-        background: "var(--bg-surface)",
-        borderLeft: "0.5px solid var(--border)",
-        zIndex: 201,
-        padding: "1.5rem",
-        display: "flex", flexDirection: "column", gap: "0.5rem",
-        transition: "right 0.3s ease",
-      }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-          <span style={{ fontWeight: 800, fontSize: 18, color: "var(--blue)" }}>AYA.Hr</span>
-          <button onClick={close} style={{ background: "transparent", border: "none", cursor: "pointer", color: "var(--text-muted)" }}>
-            <X size={22} />
+      <div className={`root-mobile-menu ${menuOpen ? "root-mobile-menu--active" : ""}`}>
+        <div className="root-mobile-header">
+          <span className="root-mobile-logo">AYA<span className="root-logo__dot">.</span>Hr</span>
+          <button className="root-close-btn" onClick={close}>
+            <X size={20} />
           </button>
         </div>
 
-        {[
-          { to: "/", label: "Accueil" },
-          { to: "/projects", label: "Projets" },
-          { to: "/experience", label: "Experience" },
-          { to: "/education", label: "Formations" },
-          { to: "/certifications", label: "Certifications" },
-          { to: "/contact", label: "Contact" },
-        ].map(({ to, label }) => (
-          <NavLink
-            key={to} to={to} onClick={close}
-            style={{ padding: "12px 16px", borderRadius: 10, color: "var(--text)", textDecoration: "none", fontSize: 16, fontWeight: 500, transition: "all 0.2s" }}
-          >
-            {label}
+        <nav className="root-mobile-links">
+          <NavLink to="/" onClick={close} className={({ isActive }) => `root-mobile-link ${isActive ? "root-mobile-link--active" : ""}`}>
+            Accueil
           </NavLink>
-        ))}
-      </div>
+          {navLinks.map(({ to, label }) => (
+            <NavLink
+              key={to} to={to} onClick={close}
+              className={({ isActive }) => `root-mobile-link ${isActive ? "root-mobile-link--active" : ""}`}
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
 
-      {/* CSS mobile */}
-      <style>{`
-        @media (max-width: 768px) {
-          .links { display: none !important; }
-          .hamburger-btn { display: inline-flex !important; }
-        }
-      `}</style>
+        <div className="root-mobile-footer">
+          <button className="root-mobile-theme" onClick={() => { setIsDark(!isDark); }}>
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            {isDark ? "Passer en mode clair" : "Passer en mode sombre"}
+          </button>
+        </div>
+      </div>
 
       <Outlet />
     </>

@@ -81,7 +81,7 @@ export default function Home() {
           <div>
             {/* Eyebrow — une seule ligne */}
             <p className="hero-eyebrow" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-              Étudiante · Licence Informatique · ENS Marrakech
+              Étudiante · Licence Informatique 
             </p>
 
             {/* Nom — une seule ligne */}

@@ -506,3 +506,9 @@ body.dark .navbar {
 @media (max-width: 640px) {
   .contact-container { grid-template-columns: 1fr; }
 }
+body.dark {
+  --bg-page: #0E0D0B;
+  --bg-surface: #161410;
+  --text: #F2EDE6;
+  --text-muted: #B0A090;
+}

@@ -401,6 +401,6 @@ body.dark .root-mobile-menu {
 }
 
 @media (max-width: 480px) {
-  .root-mobile-menu { width: 100%; right: -100%; }
+  .root-mobile-menu { width: 280px; right: -300px; }
   .root-mobile-menu--active { right: 0; }
 }

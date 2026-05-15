@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun, Home, FolderGit2, Award, Mail, Github } from 'lucide-react';
 import { Button } from './button';
-import { useTheme } from '@/lib/theme-context'; // À créer si nécessaire
-
+import { useTheme } from '@/lib/theme-context;
 interface MobileMenuProps {
   links?: Array<{ href: string; label: string; icon?: React.ReactNode }>;
 }

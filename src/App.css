@@ -272,7 +272,7 @@ body.dark .navbar {
   align-items: center;
 }
 
-.theme-toggle, .hamburger {
+.theme-toggle {
   background: transparent;
   border: 0.5px solid var(--border);
   border-radius: 8px;
@@ -284,13 +284,30 @@ body.dark .navbar {
   transition: all 0.2s;
 }
 
-.theme-toggle:hover, .hamburger:hover {
+.theme-toggle:hover {
   border-color: var(--blue);
   color: var(--blue);
   background: rgba(15,40,80,0.07);
 }
 
-.hamburger { display: none; }
+.hamburger {
+  display: none;
+  background: transparent;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text-muted);
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.hamburger:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: rgba(15,40,80,0.07);
+}
 
 /* Mobile Menu */
 .mobile-overlay {
@@ -400,26 +417,6 @@ body.dark .navbar {
 }
 
 /* Responsive */
-/* Supprimez toutes les anciennes règles .hamburger et remplacez par : */
-.hamburger {
-  display: none;
-  background: transparent;
-  border: 0.5px solid var(--border-md);
-  color: var(--text-muted);
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.hamburger:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-  background: var(--blue-dim);
-}
-
 @media (max-width: 768px) {
   .desktop-nav { display: none !important; }
   .hamburger { display: inline-flex !important; }
